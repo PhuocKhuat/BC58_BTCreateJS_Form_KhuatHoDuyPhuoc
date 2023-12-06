@@ -1,0 +1,21 @@
+/* TABLE */
+.cssTh{
+    background-color: #31373D !important;
+    color: white !important;
+    text-align: left ;
+}
+.cssTd{
+    text-align: left !important;
+}
+.searchMa{
+    height: 5vh;
+    margin-left: 24px;
+}
+.fa-search{
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    line-height: 40px;
+    border-radius: 5px;
+    margin-right: 15px;
+}

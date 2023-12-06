@@ -1,0 +1,21 @@
+.infoSV{
+    text-align: left !important;
+    padding: 10px 0;
+}
+input{
+    width: 100%;
+    height: 10vh;
+}
+.alignTitle{
+    text-align: left;
+}
+.btn-success{
+    margin-right: 1100px;
+}
+.form-control{
+    height: 60%;
+}
+p{
+    text-align: left !important;
+    margin-top: 10px;
+}
