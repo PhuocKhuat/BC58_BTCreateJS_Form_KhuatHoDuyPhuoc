@@ -2,19 +2,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./style.css";
 import { actionDelete, actionEdit } from "../../actions/actions";
-// import { EDIT } from "../../Types/contains";
+import ModalSinhVien from "../ModalSinhVien/ModalSinhVien";
+
 
 class TableSinhVien extends Component {
   render() {
-    let { mangSinhVien, handleDelete, handleEdit} = this.props;
+    let { mangSinhVien, handleDelete, handleEdit } = this.props;
     return (
       <div className="container">
         <div className="row mt-4">
           <div className="col-11">
-          <input type="text" className="searchMa" placeholder="Tìm kiếm theo mã sinh viên"/>
+            <input
+              type="text"
+              className="searchMa"
+              placeholder="Tìm kiếm theo mã sinh viên"
+            />
           </div>
           <div className="col">
-          <i class="fa fa-search"></i>
+            <i class="fa fa-search"></i>
           </div>
         </div>
         <table className="table mt-2">
@@ -24,7 +29,7 @@ class TableSinhVien extends Component {
               <th className="cssTh">Họ tên</th>
               <th className="cssTh">Số điện thoại</th>
               <th className="cssTh">Email</th>
-              <th className="cssTh">Action</th>
+              <th className="cssTh">Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -37,19 +42,22 @@ class TableSinhVien extends Component {
                 <td className="cssTd">
                   <button
                     className="btn btn-warning me-3"
-                    onClick={()=>{
-                      handleEdit(sinhVien)
+                    onClick={() => {
+                      handleEdit(sinhVien);
                     }}
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
                   >
-                    Edit
+                    Sửa
                   </button>
+                  <ModalSinhVien/>
                   <button
                     className="btn btn-danger"
                     onClick={() => {
                       handleDelete(sinhVien);
                     }}
                   >
-                    Delete
+                    Xoá
                   </button>
                 </td>
               </tr>
@@ -72,9 +80,10 @@ let mapDispatchToProps = (dispatch) => {
     handleDelete: (sinhVien) => {
       dispatch(actionDelete(sinhVien));
     },
-    handleEdit: (sinhVien) =>{
+    handleEdit: (sinhVien) => {
       dispatch(actionEdit(sinhVien));
-    }
+    },
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(TableSinhVien);

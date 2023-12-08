@@ -25,28 +25,26 @@ class FormSinhVien extends Component {
   };
   //5. Nhận vào tham số là e (event), từ đâu ?
   handleEnterInput = (e) => {
-    //6. Lấy giá trị của ô input mỗi lần được user thay đổi ô input đó.
-    let tagInut = e.target;
-    //7. Bóc tách phần tử (ES6), lấy giá trị name và value từ tagInput.
-    let { name, value, type } = tagInut;
-    let errorMessage = ""; //đúng thì thông báo không có gì.
+    //6. Bóc tách phần tử (ES6), lấy giá trị name và value từ e.target (lấy kí tự mà user gõ).
+    let { name, value, type } = e.target;
+    let errorMessage = ""; //đúng thì thông báo không có gì, tạo ở đây vì sử dụng ở trong block scope.
 
     //Kiểm tra rỗng, trim() là xác định khoảng trắng đầu cuối.
     if (value.trim() === "") {
       errorMessage = `${name} không được để trống`;
     }
 
-    //Kiểm tra email.
+    //Kiểm tra định dạng email.
     if (type === "email") {
       const re =
         /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
       if (!re.test(value)) {
         //react tự hiểu nên không cần else.
-        errorMessage = `${name} không đúng định dạng`;
+        errorMessage = `Email không đúng định dạng`;
       }
     }
 
-    //Kiểm tra sdt.
+    //Kiểm tra sdt và maSV là số.
     if (name === "sdt" || name === "maSV") {
       const re = /\d+/;
       if (!re.test(value)) {
@@ -76,7 +74,7 @@ class FormSinhVien extends Component {
       }
     );
   };
-  //11. Tạo hàm handleSubmit, tham số là e.
+  //11. Tạo hàm handleSubmit, tham số là e là react truyền.
   handleSubmit = (e) => {
     //12. Ngăn load trang khi ấn button submit.
     e.preventDefault();
@@ -84,7 +82,7 @@ class FormSinhVien extends Component {
     this.props.themSinhVien(this.state.values);
   };
 
-  //KIỂM TRA LỖI RỒI HIỆN NÚT.
+  //KIỂM TRA CÓ LỖI RỒI HIỆN NÚT.
   handleCheckError = () => {
     let valid = true;
     //Duyệt các thuộc tính của đối tượng errors, key là từng thuộc tính.
@@ -96,7 +94,7 @@ class FormSinhVien extends Component {
     }
     this.setState(
       {
-        ...this.state, //Giữ lại 2 key values và errors.
+        ...this.state, //Giữ lại 2 key values và errors, this.state phải ở trên.
         valid: valid,
       },
       () => {
@@ -196,12 +194,6 @@ class FormSinhVien extends Component {
   }
 }
 
-let mapStateToProps = (state) =>{
-   return{
-    editMangSinhVien: state.formReducer.editMangSinhVien,
-   }
-}
-
 let mapDispatchToProps = (dispatch) => {
   return {
     themSinhVien: (sinhVien) => {
@@ -210,4 +202,4 @@ let mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FormSinhVien);
+export default connect(null, mapDispatchToProps)(FormSinhVien);

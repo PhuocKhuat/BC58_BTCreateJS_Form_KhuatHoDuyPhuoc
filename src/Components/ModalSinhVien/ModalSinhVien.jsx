@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import './style.css'
 
-export default class ModalSinhVien extends Component {
+class ModalSinhVien extends Component {
   render() {
     return (
       <div
@@ -19,7 +21,7 @@ export default class ModalSinhVien extends Component {
                 style={{
                   fontSize: "30px",
                   position: "absolute",
-                  left: "460px",
+                  left: "215px",
                 }}
               >
                 Chỉnh sửa sinh viên
@@ -34,47 +36,63 @@ export default class ModalSinhVien extends Component {
             <div className="modal-body">
               <div className="form-group">
                 <div className="input-group">
-                    <div className="input-group-prepend">
-                        <p>Mã SV</p>
-                    </div>
-                    <input type="text" placeholder="Nhập mã sinh viên" />
+                  <div className="input-group-prepend">
+                    <h6>Mã SV</h6>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Nhập mã sinh viên"
+                    value={this.props.editMangSinhVien.maSV}
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <div className="input-group">
-                    <div className="input-group-prepend">
-                        <p>Họ tên</p>
-                    </div>
-                    <input type="text" placeholder="Nhập họ và tên" />
+                  <div className="input-group-prepend">
+                    <h6>Họ tên</h6>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Nhập họ và tên"
+                    value={this.props.editMangSinhVien.hoTen}
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <div className="input-group">
-                    <div className="input-group-prepend">
-                        <p>Mã SV</p>
-                    </div>
-                    <input type="text" />
+                  <div className="input-group-prepend">
+                    <h6>Số điện thoại</h6>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Nhập số điện thoại"
+                    value={this.props.editMangSinhVien.sdt}
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <div className="input-group">
-                    <div className="input-group-prepend">
-                        <p>Mã SV</p>
-                    </div>
-                    <input type="text" />
+                  <div className="input-group-prepend">
+                    <h6>Email</h6>
+                  </div>
+                  <input
+                    type="email"
+                    placeholder="Nhập email"
+                    value={this.props.editMangSinhVien.email}
+                  />
                 </div>
               </div>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer d-flex">
+              <button type="button" className="btn btn-success btnUpdate">
+                Cập nhật
+              </button>
               <button
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Purchase
+                Đóng
               </button>
             </div>
           </div>
@@ -83,3 +101,11 @@ export default class ModalSinhVien extends Component {
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+    editMangSinhVien: state.formReducer.editMangSinhVien,
+  };
+};
+
+export default connect(mapStateToProps)(ModalSinhVien);
