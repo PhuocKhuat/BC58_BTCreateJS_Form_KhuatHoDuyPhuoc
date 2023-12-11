@@ -7,7 +7,7 @@ import ModalSinhVien from "../ModalSinhVien/ModalSinhVien";
 
 class TableSinhVien extends Component {
   render() {
-    let { mangSinhVien, handleDelete, handleEdit } = this.props;
+    let { mangSinhVien, handleDelete, handleEdit} = this.props;
     return (
       <div className="container">
         <div className="row mt-4">
@@ -50,7 +50,8 @@ class TableSinhVien extends Component {
                   >
                     Sửa
                   </button>
-                  <ModalSinhVien/>
+                  <ModalSinhVien maSV={this.props.maSV}/>
+                  {/* {console.log(this.props.maSV)} */}
                   <button
                     className="btn btn-danger"
                     onClick={() => {

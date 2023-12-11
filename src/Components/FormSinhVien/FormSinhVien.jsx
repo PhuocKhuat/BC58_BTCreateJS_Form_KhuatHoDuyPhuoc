@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./style.css";
 import { actionForm } from "../../actions/actions";
 import { connect } from "react-redux";
+import TableSinhVien from "../TableSinhVien/TableSinhVien";
 // import TableSinhVien from "../TableSinhVien/TableSinhVien";
 // import { ADD } from "../../Types/contains";
 
@@ -191,6 +192,8 @@ class FormSinhVien extends Component {
             </form>
           </div>
         </div>
+        <TableSinhVien maSV={this.state.values.maSV}/>
+        {/* {console.log(this.state.values.maSV)} */}
       </div>
     );
   }

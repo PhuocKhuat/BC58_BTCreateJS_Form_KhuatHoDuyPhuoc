@@ -18,6 +18,7 @@ const initialState = {
   },
 };
 
+
 export let formReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD: {

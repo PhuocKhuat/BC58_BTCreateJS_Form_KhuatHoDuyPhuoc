@@ -3,6 +3,19 @@ import { connect } from "react-redux";
 import './style.css'
 
 class ModalSinhVien extends Component {
+  // state=
+  // {
+  //   hoTen: "Phước",
+  //   maSV: "12345",
+  //   sdt: "0994923045",
+  //   email: "abc@gmail.com",
+  // }
+  handleOnChange = (e) => {
+    // let {value} = e.target;
+    this.setState({
+      editMangSinhVien: e.target.value,
+    })
+  }
   render() {
     return (
       <div
@@ -42,7 +55,8 @@ class ModalSinhVien extends Component {
                   <input
                     type="text"
                     placeholder="Nhập mã sinh viên"
-                    value={this.props.editMangSinhVien.maSV}
+                    value={this.props.editMangSinhVien.maSV}  
+                    onChange={this.handleOnChange}
                   />
                 </div>
               </div>
@@ -55,6 +69,8 @@ class ModalSinhVien extends Component {
                     type="text"
                     placeholder="Nhập họ và tên"
                     value={this.props.editMangSinhVien.hoTen}
+                    name="hoTen"
+                    onChange={this.handleOnChange}
                   />
                 </div>
               </div>
@@ -67,6 +83,8 @@ class ModalSinhVien extends Component {
                     type="text"
                     placeholder="Nhập số điện thoại"
                     value={this.props.editMangSinhVien.sdt}
+                    name="sdt"
+                    onChange={this.handleOnChange}
                   />
                 </div>
               </div>
@@ -79,6 +97,8 @@ class ModalSinhVien extends Component {
                     type="email"
                     placeholder="Nhập email"
                     value={this.props.editMangSinhVien.email}
+                    name="email"
+                    onChange={this.handleOnChange}
                   />
                 </div>
               </div>
@@ -102,13 +122,16 @@ class ModalSinhVien extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
+    //So sánh this.props.editMangSinhVien.maSV của SV A (props cũ) với this.props.editMangSinhVien.maSV của SV B (props hiện tại).
     if(prevProps.editMangSinhVien.maSV !== this.props.editMangSinhVien.maSV){
       this.setState({
-        editMangSinhVien: this.props.editMangSinhVien,
+        // ...this.state.mangSinhVien,
+        editMangSinhVien: this.props.editMangSinhVien.maSV,
       })
     }
-    console.log("componentDidUpdate");
-    console.log(this.props.editMangSinhVien);
+    // console.log("componentDidUpdate");
+    // console.log(this.props.editMangSinhVien);
+    // console.log(this.props.maSV);
   }
 }
 
