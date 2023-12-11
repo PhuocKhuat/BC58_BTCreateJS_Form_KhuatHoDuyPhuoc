@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./style.css";
 import { actionForm } from "../../actions/actions";
 import { connect } from "react-redux";
+// import TableSinhVien from "../TableSinhVien/TableSinhVien";
 // import { ADD } from "../../Types/contains";
 
 class FormSinhVien extends Component {
@@ -172,9 +173,10 @@ class FormSinhVien extends Component {
                     type="submit"
                     className="btn btn-success mt-4 w-25"
                     style={{ position: "relative", left: "950px" }}
-                  >
+                    >
                     Thêm sinh viên
                   </button>
+                    
                 ) : (
                   <button
                     type="submit"

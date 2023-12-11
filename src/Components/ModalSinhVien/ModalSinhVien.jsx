@@ -100,6 +100,16 @@ class ModalSinhVien extends Component {
       </div>
     );
   }
+
+  componentDidUpdate(prevProps, prevState){
+    if(prevProps.editMangSinhVien.maSV !== this.props.editMangSinhVien.maSV){
+      this.setState({
+        editMangSinhVien: this.props.editMangSinhVien,
+      })
+    }
+    console.log("componentDidUpdate");
+    console.log(this.props.editMangSinhVien);
+  }
 }
 
 let mapStateToProps = (state) => {
