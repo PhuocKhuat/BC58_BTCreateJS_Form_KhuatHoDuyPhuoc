@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./style.css";
-import { actionForm } from "../../actions/actions";
+import { actionForm, actionUpdate } from "../../actions/actions";
 import { connect } from "react-redux";
 import TableSinhVien from "../TableSinhVien/TableSinhVien";
 // import TableSinhVien from "../TableSinhVien/TableSinhVien";
@@ -89,7 +89,7 @@ class FormSinhVien extends Component {
     let valid = true;
     //Duyệt các thuộc tính của đối tượng errors, key là từng thuộc tính.
     for (let key in this.state.errors) {
-      if (this.state.errors[key] !== "" || this.state.values[key] === ""){
+      if (this.state.errors[key] !== "" || this.state.values[key] === "") {
         //Khác rỗng là có nhập, không cho nhập, nhưng cái nhập đúng hay sai validate.
         valid = false;
       }
@@ -99,11 +99,21 @@ class FormSinhVien extends Component {
         ...this.state, //Giữ lại 2 key values và errors, this.state phải ở trên.
         valid: valid,
       },
-      () => {
-        console.log(this.state);
-      }
     );
   };
+  //NÚT CHỈNH SỬA.
+  handleEdit = (sinhVien) => {
+    this.setState({
+      ...this.state,
+      values: sinhVien,
+    });
+  };
+  // handleUpdate = (sinhVien) => {
+  //   this.setState({
+  //     ...this.state,
+  //     values: 123,
+  //   })
+  // }
 
   render() {
     return (
@@ -128,7 +138,9 @@ class FormSinhVien extends Component {
                     //4. Tạo hàm onChange.
                     onChange={this.handleEnterInput}
                   />
-                  <p className="text-danger text-left">{this.state.errors.maSV}</p>
+                  <p className="text-danger text-left">
+                    {this.state.errors.maSV}
+                  </p>
                 </div>
                 <div className="col-6 form-group">
                   <h6 className="alignTitle">Họ tên</h6>
@@ -170,19 +182,30 @@ class FormSinhVien extends Component {
               <div className="row">
                 {/* 9. Thêm type submit để khi user enter tự động cập nhật */}
                 {this.state.valid ? (
-                  <button
+                <button className="btn btn-success" style={{width: "15%", position: "relative", top:"62px" ,marginLeft: "875px"}} onClick={()=>{
+                  this.props.handleUpdate(this.state.values)
+                }}>Cập nhật</button>
+                ): (
+                  <button className="btn btn-success" style={{width: "15%", position: "relative", top:"62px" ,marginLeft: "875px"}}
+                  onClick={()=>{
+                    this.props.handleUpdate(this.state.values)
+                  }}
+                  disabled>Cập nhật</button>
+                  )
+                }
+                {this.state.valid ? (
+                    <button
                     type="submit"
-                    className="btn btn-success mt-4 w-25"
-                    style={{ position: "relative", left: "950px" }}
-                    >
+                    className="btn btn-primary mt-4"
+                    style={{ position: "relative", left: "1082px", width: "15%" }}
+                  >
                     Thêm sinh viên
                   </button>
-                    
                 ) : (
-                  <button
+                    <button
                     type="submit"
-                    className="btn btn-success mt-4 w-25"
-                    style={{ position: "relative", left: "950px" }}
+                    className="btn btn-primary mt-4"
+                    style={{ position: "relative", left: "1082px", width: "15%"}}
                     disabled
                   >
                     Thêm sinh viên
@@ -192,7 +215,7 @@ class FormSinhVien extends Component {
             </form>
           </div>
         </div>
-        <TableSinhVien maSV={this.state.values.maSV}/>
+        <TableSinhVien handleEdit={this.handleEdit} />
         {/* {console.log(this.state.values.maSV)} */}
       </div>
     );
@@ -204,6 +227,9 @@ let mapDispatchToProps = (dispatch) => {
     themSinhVien: (sinhVien) => {
       dispatch(actionForm(sinhVien));
     },
+    handleUpdate: (sinhVien) =>{
+      dispatch(actionUpdate(sinhVien));
+    }
   };
 };
 

@@ -1,4 +1,4 @@
-import { ADD, DELETE, EDIT } from "../Types/contains";
+import { ADD, DELETE, UPDATE } from "../Types/contains";
 
 export const actionForm = (sinhVien) =>{
     return{
@@ -14,9 +14,16 @@ export const actionDelete = (sinhVien) =>{
     }
 }
 
-export const actionEdit = (sinhVien) =>{
+// export const actionEdit = (sinhVien) =>{
+//     return{
+//         type: EDIT,
+//         payload: sinhVien,
+//     }
+// }
+
+export const actionUpdate = (sinhVien) =>{
     return{
-        type: EDIT,
+        type: UPDATE,
         payload: sinhVien,
     }
 }

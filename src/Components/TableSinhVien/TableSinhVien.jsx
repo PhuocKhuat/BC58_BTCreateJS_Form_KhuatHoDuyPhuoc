@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./style.css";
-import { actionDelete, actionEdit } from "../../actions/actions";
-import ModalSinhVien from "../ModalSinhVien/ModalSinhVien";
+import { actionDelete } from "../../actions/actions";
+// import ModalSinhVien from "../ModalSinhVien/ModalSinhVien";
 
 
 class TableSinhVien extends Component {
@@ -45,12 +45,12 @@ class TableSinhVien extends Component {
                     onClick={() => {
                       handleEdit(sinhVien);
                     }}
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    // data-bs-toggle="modal"
+                    // data-bs-target="#exampleModal"
                   >
                     Sửa
                   </button>
-                  <ModalSinhVien maSV={this.props.maSV}/>
+                  {/* <ModalSinhVien maSV={this.props.maSV}/> */}
                   {/* {console.log(this.props.maSV)} */}
                   <button
                     className="btn btn-danger"
@@ -81,9 +81,9 @@ let mapDispatchToProps = (dispatch) => {
     handleDelete: (sinhVien) => {
       dispatch(actionDelete(sinhVien));
     },
-    handleEdit: (sinhVien) => {
-      dispatch(actionEdit(sinhVien));
-    },
+    // handleEdit: (sinhVien) => {
+    //   dispatch(actionEdit(sinhVien));
+    // },
   };
 };
 
