@@ -24,6 +24,7 @@ class FormSinhVien extends Component {
       email: "",
     },
     valid: false,
+    searchSV: "",
   };
   //5. Nhận vào tham số là e (event), từ đâu ?
   handleEnterInput = (e) => {
@@ -54,7 +55,7 @@ class FormSinhVien extends Component {
       }
     }
 
-    //Kiểm tra hoTen.
+    //Kiểm tra hoTen là chữ.
     if (name === "hoTen") {
       const re = /^[a-zA-Z]+ [a-zA-Z]+$/;
       if (!re.test(value)) {
@@ -70,6 +71,7 @@ class FormSinhVien extends Component {
         ...this.state, //(Giữ lại thuộc tính valid trừ những cái muốn thay đổi, để ở trên).
         values: values,
         errors: errors,
+        [name]: value,
       },
       () => {
         this.handleCheckError();
@@ -90,16 +92,14 @@ class FormSinhVien extends Component {
     //Duyệt các thuộc tính của đối tượng errors, key là từng thuộc tính.
     for (let key in this.state.errors) {
       if (this.state.errors[key] !== "" || this.state.values[key] === "") {
-        //Khác rỗng là có nhập, không cho nhập, nhưng cái nhập đúng hay sai validate.
+        //Khác rỗng là có chữ cảnh báo, values bằng rỗng là thẻ input trống.
         valid = false;
       }
     }
-    this.setState(
-      {
-        ...this.state, //Giữ lại 2 key values và errors, this.state phải ở trên.
-        valid: valid,
-      },
-    );
+    this.setState({
+      ...this.state, //Giữ lại 2 key values và errors, this.state phải ở trên.
+      valid: valid,
+    });
   };
   //NÚT CHỈNH SỬA.
   handleEdit = (sinhVien) => {
@@ -114,7 +114,7 @@ class FormSinhVien extends Component {
   //     values: 123,
   //   })
   // }
-
+  
   render() {
     return (
       <div className="container">
@@ -182,30 +182,58 @@ class FormSinhVien extends Component {
               <div className="row">
                 {/* 9. Thêm type submit để khi user enter tự động cập nhật */}
                 {this.state.valid ? (
-                <button className="btn btn-success" style={{width: "15%", position: "relative", top:"62px" ,marginLeft: "875px"}} onClick={()=>{
-                  this.props.handleUpdate(this.state.values)
-                }}>Cập nhật</button>
-                ): (
-                  <button className="btn btn-success" style={{width: "15%", position: "relative", top:"62px" ,marginLeft: "875px"}}
-                  onClick={()=>{
-                    this.props.handleUpdate(this.state.values)
-                  }}
-                  disabled>Cập nhật</button>
-                  )
-                }
+                  <button
+                    className="btn btn-success"
+                    style={{
+                      width: "15%",
+                      position: "relative",
+                      top: "62px",
+                      marginLeft: "875px",
+                    }}
+                    onClick={() => {
+                      this.props.handleUpdate(this.state.values);
+                    }}
+                  >
+                    Cập nhật
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success"
+                    style={{
+                      width: "15%",
+                      position: "relative",
+                      top: "62px",
+                      marginLeft: "875px",
+                    }}
+                    onClick={() => {
+                      this.props.handleUpdate(this.state.values);
+                    }}
+                    disabled
+                  >
+                    Cập nhật
+                  </button>
+                )}
                 {this.state.valid ? (
-                    <button
+                  <button
                     type="submit"
                     className="btn btn-primary mt-4"
-                    style={{ position: "relative", left: "1082px", width: "15%" }}
+                    style={{
+                      position: "relative",
+                      left: "1082px",
+                      width: "15%",
+                    }}
                   >
                     Thêm sinh viên
                   </button>
                 ) : (
-                    <button
+                  <button
                     type="submit"
                     className="btn btn-primary mt-4"
-                    style={{ position: "relative", left: "1082px", width: "15%"}}
+                    style={{
+                      position: "relative",
+                      left: "1082px",
+                      width: "15%",
+                    }}
                     disabled
                   >
                     Thêm sinh viên
@@ -215,7 +243,7 @@ class FormSinhVien extends Component {
             </form>
           </div>
         </div>
-        <TableSinhVien handleEdit={this.handleEdit} />
+        <TableSinhVien handleEdit={this.handleEdit} searchSV={this.state.searchSV} handleEnterInput={this.handleEnterInput} />
         {/* {console.log(this.state.values.maSV)} */}
       </div>
     );
@@ -227,10 +255,13 @@ let mapDispatchToProps = (dispatch) => {
     themSinhVien: (sinhVien) => {
       dispatch(actionForm(sinhVien));
     },
-    handleUpdate: (sinhVien) =>{
+    handleUpdate: (sinhVien) => {
       dispatch(actionUpdate(sinhVien));
-    }
+    },
   };
 };
 
 export default connect(null, mapDispatchToProps)(FormSinhVien);
+
+// handleSearch={this.handleSubmit.searchSV}
+// value = {this.state.values.maSV}

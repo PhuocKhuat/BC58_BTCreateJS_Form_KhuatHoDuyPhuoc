@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./style.css";
-import { actionDelete } from "../../actions/actions";
+import { actionDelete, actionSearch } from "../../actions/actions";
 // import ModalSinhVien from "../ModalSinhVien/ModalSinhVien";
 
 
 class TableSinhVien extends Component {
+  
   render() {
-    let { mangSinhVien, handleDelete, handleEdit} = this.props;
+    let { mangSinhVien, handleDelete, handleEdit, handleSearch, searchSV, handleEnterInput, value} = this.props;
     return (
       <div className="container">
         <div className="row mt-4">
@@ -16,10 +17,13 @@ class TableSinhVien extends Component {
               type="text"
               className="searchMa"
               placeholder="Tìm kiếm theo mã sinh viên"
+              value={searchSV}
+              name="searchSV"
+              onChange={handleEnterInput}
             />
           </div>
           <div className="col">
-            <i class="fa fa-search"></i>
+            <i class="fa fa-search" onClick={()=>{handleSearch(searchSV)}}></i>
           </div>
         </div>
         <table className="table mt-2">
@@ -84,6 +88,9 @@ let mapDispatchToProps = (dispatch) => {
     // handleEdit: (sinhVien) => {
     //   dispatch(actionEdit(sinhVien));
     // },
+    handleSearch: (maSV) =>{
+      dispatch(actionSearch(maSV));
+    }
   };
 };
 
