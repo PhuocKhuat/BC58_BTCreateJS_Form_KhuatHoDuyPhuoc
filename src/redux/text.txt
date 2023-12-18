@@ -1,0 +1,11 @@
+let updateStudent = payload;
+      // console.log("🚀 ~ file: reducer.js:45 ~ formReducer ~ payload:", payload)
+      let updateStudents = state.mangSinhVien.map((student) => {
+        if (student.maSV === updateStudent.maSV) {
+          return updateStudent;
+        }
+        return student;
+      });
+      return { ...state, mangSinhVien: updateStudents };
+
+state.searchSV.some((key) => sinhVien[key].toLowerCase().includes(search))

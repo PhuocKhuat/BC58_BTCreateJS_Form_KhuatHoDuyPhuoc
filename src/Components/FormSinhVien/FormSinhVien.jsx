@@ -28,7 +28,7 @@ class FormSinhVien extends Component {
   };
   //5. Nhận vào tham số là e (event), từ đâu ?
   handleEnterInput = (e) => {
-    //6. Bóc tách phần tử (ES6), lấy giá trị name và value từ e.target (lấy kí tự mà user gõ).
+    //6. Bóc tách phần tử (ES6), lấy giá trị name và value từ e.target (thẻ mà user tương tác).
     let { name, value, type } = e.target;
     let errorMessage = ""; //đúng thì thông báo không có gì, tạo ở đây vì sử dụng ở trong block scope.
 
@@ -114,7 +114,7 @@ class FormSinhVien extends Component {
   //     values: 123,
   //   })
   // }
-  
+
   render() {
     return (
       <div className="container">
@@ -129,7 +129,7 @@ class FormSinhVien extends Component {
                 <div className="col-6 form-group">
                   <h6 className="alignTitle">Mã SV</h6>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control"
                     //2. Đặt tên trùng với lớp đối tượng trong reducer state.
                     name="maSV"
@@ -138,7 +138,7 @@ class FormSinhVien extends Component {
                     //4. Tạo hàm onChange.
                     onChange={this.handleEnterInput}
                   />
-                  <p className="text-danger text-left">
+                  <p className="text-danger textError">
                     {this.state.errors.maSV}
                   </p>
                 </div>
@@ -151,7 +151,7 @@ class FormSinhVien extends Component {
                     value={this.state.values.hoTen}
                     onChange={this.handleEnterInput}
                   />
-                  <p className="text-danger">{this.state.errors.hoTen}</p>
+                  <p className="text-danger textError">{this.state.errors.hoTen}</p>
                 </div>
               </div>
               <br />
@@ -159,13 +159,13 @@ class FormSinhVien extends Component {
                 <div className="col-6 form-group">
                   <h6 className="alignTitle">Số điện thoại</h6>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control"
                     name="sdt"
                     value={this.state.values.sdt}
                     onChange={this.handleEnterInput}
                   />
-                  <p className="text-danger">{this.state.errors.sdt}</p>
+                  <p className="text-danger textError">{this.state.errors.sdt}</p>
                 </div>
                 <div className="col-6 form-group">
                   <h6 className="alignTitle">Email</h6>
@@ -176,13 +176,14 @@ class FormSinhVien extends Component {
                     value={this.state.values.email}
                     onChange={this.handleEnterInput}
                   />
-                  <p className="text-danger">{this.state.errors.email}</p>
+                  <p className="text-danger textError">{this.state.errors.email}</p>
                 </div>
               </div>
-              <div className="row">
+              <div>
                 {/* 9. Thêm type submit để khi user enter tự động cập nhật */}
                 {this.state.valid ? (
                   <button
+                    type="button"
                     className="btn btn-success"
                     style={{
                       width: "15%",
@@ -198,6 +199,7 @@ class FormSinhVien extends Component {
                   </button>
                 ) : (
                   <button
+                    type="button"
                     className="btn btn-success"
                     style={{
                       width: "15%",
@@ -219,7 +221,7 @@ class FormSinhVien extends Component {
                     className="btn btn-primary mt-4"
                     style={{
                       position: "relative",
-                      left: "1082px",
+                      left: "535px",
                       width: "15%",
                     }}
                   >
@@ -231,7 +233,7 @@ class FormSinhVien extends Component {
                     className="btn btn-primary mt-4"
                     style={{
                       position: "relative",
-                      left: "1082px",
+                      left: "535px",
                       width: "15%",
                     }}
                     disabled
@@ -243,11 +245,22 @@ class FormSinhVien extends Component {
             </form>
           </div>
         </div>
-        <TableSinhVien handleEdit={this.handleEdit} searchSV={this.state.searchSV} handleEnterInput={this.handleEnterInput} />
+        <TableSinhVien
+          handleEdit={this.handleEdit}
+          searchSV={this.state.searchSV}
+          handleEnterInput={this.handleEnterInput}
+        />
         {/* {console.log(this.state.values.maSV)} */}
       </div>
     );
   }
+  // componentDidUpdate = (prevProps, prevState) =>{
+  //   if(prevProps.sinhVien.maSV !== this.props.sinhVien.maSV){
+  //     this.setState({
+  //       sinhVien: {[name]: value}
+  //     })
+  //   }
+  // }
 }
 
 let mapDispatchToProps = (dispatch) => {

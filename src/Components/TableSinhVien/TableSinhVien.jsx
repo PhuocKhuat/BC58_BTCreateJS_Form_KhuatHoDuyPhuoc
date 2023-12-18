@@ -8,7 +8,7 @@ import { actionDelete, actionSearch } from "../../actions/actions";
 class TableSinhVien extends Component {
   
   render() {
-    let { mangSinhVien, handleDelete, handleEdit, handleSearch, searchSV, handleEnterInput, value} = this.props;
+    let { mangSinhVien, handleDelete, handleEdit, handleSearch, searchSV, handleEnterInput } = this.props;
     return (
       <div className="container">
         <div className="row mt-4">

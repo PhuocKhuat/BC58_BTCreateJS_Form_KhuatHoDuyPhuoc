@@ -28,9 +28,9 @@ export const actionUpdate = (sinhVien) =>{
     }
 }
 
-export const actionSearch = (search) =>{
+export const actionSearch = (maSV) =>{
     return{
         type: SEARCH,
-        payload: search,
+        payload: maSV,
     }
 }

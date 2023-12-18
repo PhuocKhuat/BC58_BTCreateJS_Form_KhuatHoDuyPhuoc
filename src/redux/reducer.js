@@ -42,25 +42,20 @@ export let formReducer = (state = initialState, { type, payload }) => {
     //   return {...state, editMangSinhVien: payload};
     // }
     case UPDATE: {
-      // let cloneTable = [...state.mangSinhVien];
-      // let index = cloneTable.findIndex(
-      //   (sinhVien) => sinhVien.maSV === payload.maSV
-      // );
+      let cloneTable = [...state.mangSinhVien];
+      let index = cloneTable.findIndex(
+        (sinhVien) => sinhVien.maSV === payload.maSV
+      );
+      if(index !== -1){
+        cloneTable[index] = payload;
+      }
+      return {...state, mangSinhVien: cloneTable};
       // cloneTable[index] = payload;
       // cloneTable.splice(index, 2, payload);
-      let updateStudent = payload;
-      // console.log("🚀 ~ file: reducer.js:45 ~ formReducer ~ payload:", payload)
-      let updateStudents = state.mangSinhVien.map((student) => {
-        if (student.maSV === updateStudent.maSV) {
-          return updateStudent;
-        }
-        return student;
-      });
-      return { ...state, mangSinhVien: updateStudents };
+      
     };
     case SEARCH: {
       let search = payload.toLowerCase();
-      // let cloneMang = [...state.mangSinhVien];
       let resultFilter = state.mangSinhVien.filter(sinhVien => sinhVien.maSV.toLowerCase().includes(search));
       return {...state, mangSinhVien: resultFilter };
     }
